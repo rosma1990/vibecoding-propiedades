@@ -1,4 +1,4 @@
-import { Property } from '../../data/mockProperties';
+import { Property } from '../../../lib/properties';
 
 interface PropertyCardProps {
   property: Property;
@@ -14,7 +14,7 @@ export default function PropertyCard({ property, variant = 'standard', className
           <img
             alt={property.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            src={property.imageUrl}
+            src={property.image_url}
           />
           {property.badge && (
             <div className="absolute top-4 left-4 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic-dark dark:text-white">
@@ -64,7 +64,7 @@ export default function PropertyCard({ property, variant = 'standard', className
         <img
           alt={property.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          src={property.imageUrl}
+          src={property.image_url}
         />
         <button className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
           <span className="material-icons text-lg">favorite_border</span>
