@@ -40,17 +40,28 @@ export async function getFeaturedProperties(): Promise<Property[]> {
 }
 
 export async function getNewInMarketProperties(
-  page: number = 1
+  page: number = 1,
+  location?: string,
+  type?: string
 ): Promise<PaginatedProperties> {
   const from = (page - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
-  const { data, error, count } = await supabase
+  let query = supabase
     .from('properties')
     .select('*', { count: 'exact' })
     .eq('is_featured', false)
-    .order('created_at', { ascending: true })
-    .range(from, to);
+    .order('created_at', { ascending: true });
+
+  if (location && location.trim()) {
+    query = query.ilike('location', `%${location.trim()}%`);
+  }
+
+  if (type && type.trim() && type.toLowerCase() !== 'all') {
+    query = query.ilike('title', `%${type.trim()}%`);
+  }
+
+  const { data, error, count } = await query.range(from, to);
 
   if (error) {
     console.error('Error fetching new in market properties:', error);
@@ -91,4 +102,19 @@ export async function getPropertyBySlug(slug: string): Promise<Property | null> 
   }
 
   return data as Property;
+}
+
+export async function toggleFeatured(id: string, currentValue: boolean): Promise<{ success: boolean; is_featured: boolean }> {
+  const newValue = !currentValue;
+  const { error } = await supabase
+    .from('properties')
+    .update({ is_featured: newValue })
+    .eq('id', id);
+
+  if (error) {
+    console.error('Error toggling featured:', error);
+    return { success: false, is_featured: currentValue };
+  }
+
+  return { success: true, is_featured: newValue };
 }

@@ -6,11 +6,16 @@ interface NewInMarketProps {
   properties: Property[];
   currentPage: number;
   totalPages: number;
+  totalCount?: number;
+  locationFilter?: string;
+  typeFilter?: string;
 }
 
-export default function NewInMarket({ properties, currentPage, totalPages }: NewInMarketProps) {
+export default function NewInMarket({ properties, currentPage, totalPages, totalCount, locationFilter, typeFilter }: NewInMarketProps) {
   const hasPrev = currentPage > 1;
   const hasNext = currentPage < totalPages;
+  const activeTypeFilter = typeFilter && typeFilter.toLowerCase() !== 'all' ? typeFilter : undefined;
+  const isFiltered = Boolean(locationFilter?.trim()) || Boolean(activeTypeFilter);
 
   // Generate page numbers to show (max 5 centered around current)
   const getPageNumbers = () => {
@@ -32,36 +37,59 @@ export default function NewInMarket({ properties, currentPage, totalPages }: New
       {/* Header */}
       <div className="flex items-end justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-light text-nordic-dark ">
-            New in Market
+          <h2 className="text-2xl font-light text-nordic-dark">
+            {isFiltered ? 'Search Results' : 'New in Market'}
           </h2>
           <p className="text-nordic-muted mt-1 text-sm">
-            Fresh opportunities added this week.
+            {isFiltered
+              ? (
+                <>
+                  <span className="font-medium text-mosque">{totalCount ?? properties.length}</span>{' '}
+                  propert{totalCount === 1 ? 'y' : 'ies'} found
+                  {activeTypeFilter && <> matching <span className="font-medium text-nordic-dark">{activeTypeFilter}</span></>}
+                  {locationFilter?.trim() && <> in <span className="font-medium text-nordic-dark">{locationFilter}</span></>}
+                </>
+              )
+              : 'Fresh opportunities added this week.'}
           </p>
         </div>
-        <div className="hidden md:flex bg-white  p-1 rounded-lg">
-          <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">
-            All
-          </button>
-          <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark ">
-            Buy
-          </button>
-          <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark ">
-            Rent
-          </button>
-        </div>
+        {!isFiltered && (
+          <div className="hidden md:flex bg-white p-1 rounded-lg">
+            <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">
+              All
+            </button>
+            <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">
+              Buy
+            </button>
+            <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">
+              Rent
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {properties.map((property) => (
-          <PropertyCard
-            key={property.id}
-            property={property}
-            variant="standard"
-          />
-        ))}
-      </div>
+      {/* Grid or empty state */}
+      {properties.length === 0 ? (
+        <div className="py-20 text-center">
+          <span className="material-icons text-5xl text-nordic-muted/30 mb-4 block">search_off</span>
+          <h3 className="text-xl font-medium text-nordic-dark mb-2">No properties found</h3>
+          <p className="text-nordic-muted text-sm">
+            {isFiltered
+              ? `We couldn't find any properties in "${locationFilter}". Try a different city or state.`
+              : 'No properties available right now. Check back soon!'}
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {properties.map((property) => (
+            <PropertyCard
+              key={property.id}
+              property={property}
+              variant="standard"
+            />
+          ))}
+        </div>
+      )}
 
       {/* Pagination */}
       {totalPages > 1 && (
