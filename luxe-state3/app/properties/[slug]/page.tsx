@@ -65,21 +65,21 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
             <div className="sticky top-28 space-y-6">
               
               {/* Pricing & Contact Info */}
-              <div className="bg-white dark:bg-white/5 p-6 rounded-xl shadow-sm border border-mosque/5 dark:border-white/5">
+              <div className="bg-white  p-6 rounded-xl shadow-sm border border-mosque/5 ">
                 <div className="mb-4">
-                  <h1 className="text-4xl font-display font-light text-nordic-dark dark:text-white mb-2">{property.price}</h1>
+                  <h1 className="text-4xl font-display font-light text-nordic-dark  mb-2">{property.price}</h1>
                   <p className="text-nordic-muted font-medium flex items-center gap-1">
                     <span className="material-icons text-mosque text-sm">location_on</span>
                     {property.location}
                   </p>
                 </div>
                 
-                <div className="h-px bg-slate-100 dark:bg-white/10 my-6"></div>
+                <div className="h-px bg-slate-100  my-6"></div>
                 
                 <div className="flex items-center gap-4 mb-6">
-                  <img alt="Agent" className="w-14 h-14 rounded-full object-cover border-2 border-white dark:border-nordic-dark shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TxUmdQRb2VMjuaNxLEwLorv_dgHzoET2_wL5toSvew6nhtziaR3DX-U69DBN7J74yO6oKokpw8tqEFutJf13MeXghCy7FwZuAxnoJel6FYcKeCRUVinpZtrNnkZvXd-MY5_2MAtRD7JP5BieHixfCaeAPW04jm-y-nvF3HIrwcZ_HRDk_MrNP5WiPV3u9zNrEgM-SQoWGh4xLVSV444aZAbVl03mjjsW5WBpIeodCyqJxprTDp6Q157D06VxcdUSCf-l9UKQT-w" />
+                  <img alt="Agent" className="w-14 h-14 rounded-full object-cover border-2 border-white  shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TxUmdQRb2VMjuaNxLEwLorv_dgHzoET2_wL5toSvew6nhtziaR3DX-U69DBN7J74yO6oKokpw8tqEFutJf13MeXghCy7FwZuAxnoJel6FYcKeCRUVinpZtrNnkZvXd-MY5_2MAtRD7JP5BieHixfCaeAPW04jm-y-nvF3HIrwcZ_HRDk_MrNP5WiPV3u9zNrEgM-SQoWGh4xLVSV444aZAbVl03mjjsW5WBpIeodCyqJxprTDp6Q157D06VxcdUSCf-l9UKQT-w" />
                   <div>
-                    <h3 className="font-semibold text-nordic-dark dark:text-white">Sarah Jenkins</h3>
+                    <h3 className="font-semibold text-nordic-dark ">Sarah Jenkins</h3>
                     <div className="flex items-center gap-1 text-xs text-mosque font-medium">
                       <span className="material-icons text-[14px]">star</span>
                       <span>Top Rated Agent</span>
@@ -100,7 +100,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                     <span className="material-icons text-xl group-hover:scale-110 transition-transform">calendar_today</span>
                     Schedule Visit
                   </button>
-                  <button className="w-full bg-transparent border border-nordic-dark/10 dark:border-white/10 hover:border-mosque text-nordic-dark/80 dark:text-white/80 hover:text-mosque py-4 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+                  <button className="w-full bg-transparent border border-nordic-dark/10  hover:border-mosque text-nordic-dark/80  hover:text-mosque py-4 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
                     <span className="material-icons text-xl">mail_outline</span>
                     Contact Agent
                   </button>
@@ -108,10 +108,10 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
               </div>
 
               {/* Map Preview */}
-              <div className="bg-white dark:bg-white/5 p-2 rounded-xl shadow-sm border border-mosque/5 dark:border-white/5">
-                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100 dark:bg-white/5">
+              <div className="bg-white  p-2 rounded-xl shadow-sm border border-mosque/5 ">
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100 ">
                   <MapClient locationString={property.location} />
-                  <a href="#" className="absolute bottom-2 right-2 bg-white/90 dark:bg-black/80 text-xs font-medium px-2 py-1 rounded shadow-sm text-nordic-dark dark:text-white hover:text-mosque z-[1000]">View on Map</a>
+                  <a href="#" className="absolute bottom-2 right-2 bg-white/90  text-xs font-medium px-2 py-1 rounded shadow-sm text-nordic-dark  hover:text-mosque z-[1000]">View on Map</a>
                 </div>
               </div>
 
@@ -120,34 +120,34 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
 
           {/* Details Section */}
           <div className="lg:col-span-8 lg:row-start-2 lg:-mt-8 space-y-8">
-            <div className="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border border-mosque/5 dark:border-white/5">
-              <h2 className="text-lg font-semibold mb-6 text-nordic-dark dark:text-white">Property Features</h2>
+            <div className="bg-white  p-8 rounded-xl shadow-sm border border-mosque/5 ">
+              <h2 className="text-lg font-semibold mb-6 text-nordic-dark ">Property Features</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 dark:bg-white/5 rounded-lg border border-mosque/10 dark:border-white/5">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
                   <span className="material-icons text-mosque text-2xl mb-2">square_foot</span>
-                  <span className="text-xl font-bold text-nordic-dark dark:text-white">{property.area}</span>
+                  <span className="text-xl font-bold text-nordic-dark ">{property.area}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 dark:bg-white/5 rounded-lg border border-mosque/10 dark:border-white/5">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
                   <span className="material-icons text-mosque text-2xl mb-2">bed</span>
-                  <span className="text-xl font-bold text-nordic-dark dark:text-white">{property.beds}</span>
+                  <span className="text-xl font-bold text-nordic-dark ">{property.beds}</span>
                   <span className="text-xs uppercase tracking-wider text-nordic-muted">Bedrooms</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 dark:bg-white/5 rounded-lg border border-mosque/10 dark:border-white/5">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
                   <span className="material-icons text-mosque text-2xl mb-2">shower</span>
-                  <span className="text-xl font-bold text-nordic-dark dark:text-white">{property.baths}</span>
+                  <span className="text-xl font-bold text-nordic-dark ">{property.baths}</span>
                   <span className="text-xs uppercase tracking-wider text-nordic-muted">Bathrooms</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 dark:bg-white/5 rounded-lg border border-mosque/10 dark:border-white/5">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
                   <span className="material-icons text-mosque text-2xl mb-2">directions_car</span>
-                  <span className="text-xl font-bold text-nordic-dark dark:text-white">2</span>
+                  <span className="text-xl font-bold text-nordic-dark ">2</span>
                   <span className="text-xs uppercase tracking-wider text-nordic-muted">Garage</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border border-mosque/5 dark:border-white/5">
-              <h2 className="text-lg font-semibold mb-4 text-nordic-dark dark:text-white">About this home</h2>
-              <div className="prose prose-slate dark:prose-invert max-w-none text-nordic-muted leading-relaxed">
+            <div className="bg-white  p-8 rounded-xl shadow-sm border border-mosque/5 ">
+              <h2 className="text-lg font-semibold mb-4 text-nordic-dark ">About this home</h2>
+              <div className="prose prose-slate  max-w-none text-nordic-muted leading-relaxed">
                 <p className="mb-4">
                   Experience modern luxury in this architecturally stunning home located in the heart of {property.location}. Designed with an emphasis on indoor-outdoor living, the residence features floor-to-ceiling glass walls that flood the interiors with natural light.
                 </p>
@@ -161,8 +161,8 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
               </button>
             </div>
 
-            <div className="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border border-mosque/5 dark:border-white/5">
-              <h2 className="text-lg font-semibold mb-6 text-nordic-dark dark:text-white">Amenities</h2>
+            <div className="bg-white  p-8 rounded-xl shadow-sm border border-mosque/5 ">
+              <h2 className="text-lg font-semibold mb-6 text-nordic-dark ">Amenities</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
@@ -191,17 +191,17 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
               </div>
             </div>
 
-            <div className="bg-mosque/5 dark:bg-mosque/10 p-6 rounded-xl border border-mosque/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="bg-mosque/5  p-6 rounded-xl border border-mosque/10 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-white dark:bg-black/20 rounded-full text-mosque shadow-sm">
+                <div className="p-3 bg-white  rounded-full text-mosque shadow-sm">
                   <span className="material-icons">calculate</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-nordic-dark dark:text-white">Estimated Payment</h3>
+                  <h3 className="font-semibold text-nordic-dark ">Estimated Payment</h3>
                   <p className="text-sm text-nordic-muted">Starting from <strong className="text-mosque">$5,430/mo</strong> with 20% down</p>
                 </div>
               </div>
-              <button className="whitespace-nowrap px-4 py-2 bg-white dark:bg-white/10 border border-nordic-dark/10 dark:border-white/10 rounded-lg text-sm font-semibold hover:border-mosque transition-colors text-nordic-dark dark:text-white">
+              <button className="whitespace-nowrap px-4 py-2 bg-white  border border-nordic-dark/10  rounded-lg text-sm font-semibold hover:border-mosque transition-colors text-nordic-dark ">
                 Calculate Mortgage
               </button>
             </div>
@@ -209,7 +209,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
         </div>
       </main>
       
-      <footer className="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-white/5 mt-12 py-12">
+      <footer className="bg-white  border-t border-slate-200  mt-12 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-sm text-nordic-muted">
             © 2023 LuxeEstate Inc. All rights reserved.

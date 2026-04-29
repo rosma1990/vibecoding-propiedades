@@ -2,15 +2,12 @@
 
 :root {
   --background-light: #EEF6F6; /* Clear Day */
-  --background-dark: #0f231f;
   --foreground-light: #19322F; /* Nordic */
-  --foreground-dark: #ffffff;
 }
 
 @theme inline {
   --color-primary: #06f9d0;
   --color-background-light: var(--background-light);
-  --color-background-dark: var(--background-dark);
   --color-nordic-dark: #19322F;
   --color-nordic-muted: #5C706D;
   --color-mosque: #006655;
@@ -21,8 +18,6 @@
   --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
   --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
 }
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   background: var(--background-light);

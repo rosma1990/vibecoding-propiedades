@@ -32,21 +32,21 @@ export default function NewInMarket({ properties, currentPage, totalPages }: New
       {/* Header */}
       <div className="flex items-end justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-light text-nordic-dark dark:text-white">
+          <h2 className="text-2xl font-light text-nordic-dark ">
             New in Market
           </h2>
           <p className="text-nordic-muted mt-1 text-sm">
             Fresh opportunities added this week.
           </p>
         </div>
-        <div className="hidden md:flex bg-white dark:bg-white/5 p-1 rounded-lg">
+        <div className="hidden md:flex bg-white  p-1 rounded-lg">
           <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">
             All
           </button>
-          <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark dark:hover:text-white">
+          <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark ">
             Buy
           </button>
-          <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark dark:hover:text-white">
+          <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark ">
             Rent
           </button>
         </div>
@@ -73,8 +73,8 @@ export default function NewInMarket({ properties, currentPage, totalPages }: New
             className={`
               flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-200
               ${hasPrev
-                ? 'border-nordic-dark/10 dark:border-white/10 text-nordic-dark dark:text-white bg-white dark:bg-white/5 hover:border-mosque hover:text-mosque'
-                : 'border-nordic-dark/5 dark:border-white/5 text-nordic-dark/30 dark:text-white/20 bg-white/50 dark:bg-white/2 cursor-not-allowed pointer-events-none'
+                ? 'border-nordic-dark/10  text-nordic-dark  bg-white  hover:border-mosque hover:text-mosque'
+                : 'border-nordic-dark/5  text-nordic-dark/30  bg-white/50  cursor-not-allowed pointer-events-none'
               }
             `}
           >
@@ -91,8 +91,8 @@ export default function NewInMarket({ properties, currentPage, totalPages }: New
                 className={`
                   w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200
                   ${pageNum === currentPage
-                    ? 'bg-nordic-dark dark:bg-white text-white dark:text-nordic-dark shadow-sm'
-                    : 'bg-white dark:bg-white/5 border border-nordic-dark/10 dark:border-white/10 text-nordic-dark dark:text-white hover:border-mosque hover:text-mosque'
+                    ? 'bg-nordic-dark  text-white  shadow-sm'
+                    : 'bg-white  border border-nordic-dark/10  text-nordic-dark  hover:border-mosque hover:text-mosque'
                   }
                 `}
               >
@@ -108,8 +108,8 @@ export default function NewInMarket({ properties, currentPage, totalPages }: New
             className={`
               flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-200
               ${hasNext
-                ? 'border-nordic-dark/10 dark:border-white/10 text-nordic-dark dark:text-white bg-white dark:bg-white/5 hover:border-mosque hover:text-mosque'
-                : 'border-nordic-dark/5 dark:border-white/5 text-nordic-dark/30 dark:text-white/20 bg-white/50 dark:bg-white/2 cursor-not-allowed pointer-events-none'
+                ? 'border-nordic-dark/10  text-nordic-dark  bg-white  hover:border-mosque hover:text-mosque'
+                : 'border-nordic-dark/5  text-nordic-dark/30  bg-white/50  cursor-not-allowed pointer-events-none'
               }
             `}
           >

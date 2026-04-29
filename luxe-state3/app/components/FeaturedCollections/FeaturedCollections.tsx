@@ -10,7 +10,7 @@ export default function FeaturedCollections({ properties }: FeaturedCollectionsP
     <section className="mb-16">
       <div className="flex items-end justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-light text-nordic-dark dark:text-white">
+          <h2 className="text-2xl font-light text-nordic-dark ">
             Featured Collections
           </h2>
           <p className="text-nordic-muted mt-1 text-sm">
