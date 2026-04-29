@@ -12,6 +12,8 @@ export interface Property {
   badge?: string | null;
   type?: 'sale' | 'rent' | null;
   is_featured?: boolean;
+  slug?: string;
+  images?: string[];
 }
 
 export interface PaginatedProperties {
@@ -65,4 +67,29 @@ export async function getNewInMarketProperties(
     totalPages,
     currentPage: page,
   };
+}
+
+export async function getPropertyBySlug(slug: string): Promise<Property | null> {
+  const { data, error } = await supabase
+    .from('properties')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error || !data) {
+    // Fallback: Check if it's an ID
+    const { data: idData, error: idError } = await supabase
+      .from('properties')
+      .select('*')
+      .eq('id', slug)
+      .single();
+      
+    if (idError || !idData) {
+      console.error('Error fetching property by slug or id:', error || idError);
+      return null;
+    }
+    return idData as Property;
+  }
+
+  return data as Property;
 }

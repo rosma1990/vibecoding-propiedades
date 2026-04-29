@@ -1,3 +1,6 @@
+'use client';
+
+import Link from 'next/link';
 import { Property } from '../../../lib/properties';
 
 interface PropertyCardProps {
@@ -9,7 +12,7 @@ interface PropertyCardProps {
 export default function PropertyCard({ property, variant = 'standard', className = '' }: PropertyCardProps) {
   if (variant === 'featured') {
     return (
-      <div className={`group relative rounded-xl overflow-hidden shadow-soft bg-white dark:bg-white/5 cursor-pointer ${className}`}>
+      <Link href={`/properties/${property.slug || property.id}`} className={`block group relative rounded-xl overflow-hidden shadow-soft bg-white dark:bg-white/5 cursor-pointer ${className}`}>
         <div className="aspect-[4/3] w-full overflow-hidden relative">
           <img
             alt={property.title}
@@ -21,7 +24,10 @@ export default function PropertyCard({ property, variant = 'standard', className
               {property.badge}
             </div>
           )}
-          <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-nordic-dark hover:bg-mosque hover:text-white transition-all">
+          <button 
+            onClick={(e) => e.preventDefault()}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center text-nordic-dark hover:bg-mosque hover:text-white transition-all"
+          >
             <span className="material-icons text-xl">favorite_border</span>
           </button>
         </div>
@@ -49,7 +55,7 @@ export default function PropertyCard({ property, variant = 'standard', className
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 
@@ -59,14 +65,17 @@ export default function PropertyCard({ property, variant = 'standard', className
   const badgeText = isRent ? 'FOR RENT' : 'FOR SALE';
 
   return (
-    <article className={`bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${className}`}>
+    <Link href={`/properties/${property.slug || property.id}`} className={`block bg-white dark:bg-white/5 rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${className}`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           alt={property.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           src={property.image_url}
         />
-        <button className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
+        <button 
+          onClick={(e) => e.preventDefault()}
+          className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/50 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark"
+        >
           <span className="material-icons text-lg">favorite_border</span>
         </button>
         <div className={`absolute bottom-3 left-3 ${badgeClass} text-white text-xs font-bold px-2 py-1 rounded`}>
@@ -97,6 +106,6 @@ export default function PropertyCard({ property, variant = 'standard', className
           </div>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
