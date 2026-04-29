@@ -8,12 +8,11 @@ export interface Property {
   beds: number;
   baths: number;
   area: string;
-  image_url: string;
   badge?: string | null;
   type?: 'sale' | 'rent' | null;
   is_featured?: boolean;
   slug?: string;
-  images?: string[];
+  images: string[];
 }
 
 export interface PaginatedProperties {

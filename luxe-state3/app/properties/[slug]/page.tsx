@@ -17,7 +17,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
     notFound();
   }
 
-  const images = property.images && property.images.length > 0 ? property.images : [property.image_url];
+  const images = property.images;
   const mainImage = images[0];
 
   return (
