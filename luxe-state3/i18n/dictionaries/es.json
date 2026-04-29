@@ -1,0 +1,88 @@
+{
+  "navbar": {
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "sell": "Vender",
+    "saved_homes": "Guardados"
+  },
+  "hero": {
+    "title_start": "Encuentra tu ",
+    "title_highlight": "santuario",
+    "title_end": ".",
+    "search_placeholder": "Buscar por ciudad, vecindario o dirección...",
+    "search_button": "Buscar",
+    "filters": "Filtros",
+    "clear_all": "Borrar todo",
+    "chips": {
+      "all": "Todos",
+      "house": "Casa",
+      "apartment": "Apartamento",
+      "villa": "Villa",
+      "penthouse": "Penthouse"
+    }
+  },
+  "featured_collections": {
+    "title": "Colecciones Destacadas",
+    "subtitle": "Propiedades seleccionadas para el ojo exigente.",
+    "view_all": "Ver todas las propiedades"
+  },
+  "new_in_market": {
+    "title": "Nuevo en el Mercado",
+    "search_results": "Resultados de Búsqueda",
+    "properties_found": "propiedades encontradas",
+    "property_found": "propiedad encontrada",
+    "matching": "coincidiendo con",
+    "in": "en",
+    "subtitle": "Nuevas oportunidades añadidas esta semana.",
+    "no_properties": "No se encontraron propiedades",
+    "no_properties_filtered": "No pudimos encontrar propiedades. Intente ajustar su búsqueda.",
+    "no_properties_empty": "No hay propiedades disponibles ahora mismo. ¡Vuelva pronto!",
+    "pagination_prev": "Anterior",
+    "pagination_next": "Siguiente",
+    "page": "Página",
+    "of": "de",
+    "filters": {
+      "all": "Todos",
+      "buy": "Comprar",
+      "rent": "Alquilar"
+    }
+  },
+  "property_card": {
+    "beds": "Habs",
+    "baths": "Baños",
+    "sqft": "pies cuad.",
+    "for_sale": "EN VENTA",
+    "for_rent": "ALQUILER",
+    "mo": "/mes"
+  },
+  "property_details": {
+    "premium": "Premium",
+    "view_all_photos": "Ver Todas las Fotos",
+    "top_rated_agent": "Agente Destacado",
+    "schedule_visit": "Agendar Visita",
+    "contact_agent": "Contactar Agente",
+    "view_on_map": "Ver en Mapa",
+    "property_features": "Características",
+    "bedrooms": "Dormitorios",
+    "bathrooms": "Baños",
+    "garage": "Garaje",
+    "about_this_home": "Acerca de esta casa",
+    "read_more": "Leer más",
+    "amenities_title": "Comodidades",
+    "amenities": {
+      "smart_home": "Sistema de Casa Inteligente",
+      "pool": "Piscina",
+      "heating_cooling": "Calefacción y Aire Central",
+      "ev_charging": "Carga de Vehículo Eléctrico",
+      "gym": "Gimnasio Privado",
+      "wine_cellar": "Bodega"
+    },
+    "estimated_payment": "Pago Estimado",
+    "starting_from": "A partir de",
+    "with_down": "con 20% de anticipo",
+    "calculate_mortgage": "Calcular Hipoteca"
+  },
+  "footer": {
+    "rights": "© 2023 LuxeEstate Inc. Todos los derechos reservados."
+  }
+}

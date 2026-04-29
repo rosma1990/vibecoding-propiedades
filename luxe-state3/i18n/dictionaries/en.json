@@ -1,0 +1,88 @@
+{
+  "navbar": {
+    "buy": "Buy",
+    "rent": "Rent",
+    "sell": "Sell",
+    "saved_homes": "Saved Homes"
+  },
+  "hero": {
+    "title_start": "Find your ",
+    "title_highlight": "sanctuary",
+    "title_end": ".",
+    "search_placeholder": "Search by city, neighborhood, or address...",
+    "search_button": "Search",
+    "filters": "Filters",
+    "clear_all": "Clear all",
+    "chips": {
+      "all": "All",
+      "house": "House",
+      "apartment": "Apartment",
+      "villa": "Villa",
+      "penthouse": "Penthouse"
+    }
+  },
+  "featured_collections": {
+    "title": "Featured Collections",
+    "subtitle": "Curated properties for the discerning eye.",
+    "view_all": "View all properties"
+  },
+  "new_in_market": {
+    "title": "New in Market",
+    "search_results": "Search Results",
+    "properties_found": "properties found",
+    "property_found": "property found",
+    "matching": "matching",
+    "in": "in",
+    "subtitle": "Fresh opportunities added this week.",
+    "no_properties": "No properties found",
+    "no_properties_filtered": "We couldn't find any properties. Try adjusting your search.",
+    "no_properties_empty": "No properties available right now. Check back soon!",
+    "pagination_prev": "Prev",
+    "pagination_next": "Next",
+    "page": "Page",
+    "of": "of",
+    "filters": {
+      "all": "All",
+      "buy": "Buy",
+      "rent": "Rent"
+    }
+  },
+  "property_card": {
+    "beds": "Beds",
+    "baths": "Baths",
+    "sqft": "sqft",
+    "for_sale": "FOR SALE",
+    "for_rent": "FOR RENT",
+    "mo": "/mo"
+  },
+  "property_details": {
+    "premium": "Premium",
+    "view_all_photos": "View All Photos",
+    "top_rated_agent": "Top Rated Agent",
+    "schedule_visit": "Schedule Visit",
+    "contact_agent": "Contact Agent",
+    "view_on_map": "View on Map",
+    "property_features": "Property Features",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "garage": "Garage",
+    "about_this_home": "About this home",
+    "read_more": "Read more",
+    "amenities_title": "Amenities",
+    "amenities": {
+      "smart_home": "Smart Home System",
+      "pool": "Swimming Pool",
+      "heating_cooling": "Central Heating & Cooling",
+      "ev_charging": "Electric Vehicle Charging",
+      "gym": "Private Gym",
+      "wine_cellar": "Wine Cellar"
+    },
+    "estimated_payment": "Estimated Payment",
+    "starting_from": "Starting from",
+    "with_down": "with 20% down",
+    "calculate_mortgage": "Calculate Mortgage"
+  },
+  "footer": {
+    "rights": "© 2023 LuxeEstate Inc. All rights reserved."
+  }
+}

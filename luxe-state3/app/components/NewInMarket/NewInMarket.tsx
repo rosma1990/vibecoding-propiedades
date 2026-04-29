@@ -1,6 +1,9 @@
+"use client";
+
 import Link from 'next/link';
 import { Property } from '../../../lib/properties';
 import PropertyCard from '../PropertyCard/PropertyCard';
+import { useTranslation } from '../../contexts/LanguageContext';
 
 interface NewInMarketProps {
   properties: Property[];
@@ -16,6 +19,8 @@ export default function NewInMarket({ properties, currentPage, totalPages, total
   const hasNext = currentPage < totalPages;
   const activeTypeFilter = typeFilter && typeFilter.toLowerCase() !== 'all' ? typeFilter : undefined;
   const isFiltered = Boolean(locationFilter?.trim()) || Boolean(activeTypeFilter);
+
+  const { dictionary } = useTranslation();
 
   // Generate page numbers to show (max 5 centered around current)
   const getPageNumbers = () => {
@@ -38,31 +43,31 @@ export default function NewInMarket({ properties, currentPage, totalPages, total
       <div className="flex items-end justify-between mb-8">
         <div>
           <h2 className="text-2xl font-light text-nordic-dark">
-            {isFiltered ? 'Search Results' : 'New in Market'}
+            {isFiltered ? dictionary.new_in_market.search_results : dictionary.new_in_market.title}
           </h2>
           <p className="text-nordic-muted mt-1 text-sm">
             {isFiltered
               ? (
                 <>
                   <span className="font-medium text-mosque">{totalCount ?? properties.length}</span>{' '}
-                  propert{totalCount === 1 ? 'y' : 'ies'} found
-                  {activeTypeFilter && <> matching <span className="font-medium text-nordic-dark">{activeTypeFilter}</span></>}
-                  {locationFilter?.trim() && <> in <span className="font-medium text-nordic-dark">{locationFilter}</span></>}
+                  {totalCount === 1 ? dictionary.new_in_market.property_found : dictionary.new_in_market.properties_found}
+                  {activeTypeFilter && <> {dictionary.new_in_market.matching} <span className="font-medium text-nordic-dark">{dictionary.hero.chips[activeTypeFilter.toLowerCase()] || activeTypeFilter}</span></>}
+                  {locationFilter?.trim() && <> {dictionary.new_in_market.in} <span className="font-medium text-nordic-dark">{locationFilter}</span></>}
                 </>
               )
-              : 'Fresh opportunities added this week.'}
+              : dictionary.new_in_market.subtitle}
           </p>
         </div>
         {!isFiltered && (
           <div className="hidden md:flex bg-white p-1 rounded-lg">
             <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">
-              All
+              {dictionary.new_in_market.filters.all}
             </button>
             <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">
-              Buy
+              {dictionary.new_in_market.filters.buy}
             </button>
             <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">
-              Rent
+              {dictionary.new_in_market.filters.rent}
             </button>
           </div>
         )}
@@ -72,11 +77,11 @@ export default function NewInMarket({ properties, currentPage, totalPages, total
       {properties.length === 0 ? (
         <div className="py-20 text-center">
           <span className="material-icons text-5xl text-nordic-muted/30 mb-4 block">search_off</span>
-          <h3 className="text-xl font-medium text-nordic-dark mb-2">No properties found</h3>
+          <h3 className="text-xl font-medium text-nordic-dark mb-2">{dictionary.new_in_market.no_properties}</h3>
           <p className="text-nordic-muted text-sm">
             {isFiltered
-              ? `We couldn't find any properties in "${locationFilter}". Try a different city or state.`
-              : 'No properties available right now. Check back soon!'}
+              ? dictionary.new_in_market.no_properties_filtered
+              : dictionary.new_in_market.no_properties_empty}
           </p>
         </div>
       ) : (
@@ -107,7 +112,7 @@ export default function NewInMarket({ properties, currentPage, totalPages, total
             `}
           >
             <span className="material-icons text-base leading-none">arrow_back</span>
-            Prev
+            {dictionary.new_in_market.pagination_prev}
           </Link>
 
           {/* Page numbers */}
@@ -141,7 +146,7 @@ export default function NewInMarket({ properties, currentPage, totalPages, total
               }
             `}
           >
-            Next
+            {dictionary.new_in_market.pagination_next}
             <span className="material-icons text-base leading-none">arrow_forward</span>
           </Link>
         </div>
@@ -150,7 +155,7 @@ export default function NewInMarket({ properties, currentPage, totalPages, total
       {/* Summary */}
       {totalPages > 0 && (
         <p className="text-center mt-4 text-xs text-nordic-muted">
-          Page {currentPage} of {totalPages}
+          {dictionary.new_in_market.page} {currentPage} {dictionary.new_in_market.of} {totalPages}
         </p>
       )}
     </section>

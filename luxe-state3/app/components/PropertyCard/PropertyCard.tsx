@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Property, toggleFeatured } from '../../../lib/properties';
+import { useTranslation } from '../../contexts/LanguageContext';
 
 interface PropertyCardProps {
   property: Property;
@@ -15,6 +16,7 @@ export default function PropertyCard({ property, variant = 'standard', className
   const router = useRouter();
   const [isFeatured, setIsFeatured] = useState(property.is_featured ?? false);
   const [isLoading, setIsLoading] = useState(false);
+  const { dictionary } = useTranslation();
 
   const handleFavorite = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -85,10 +87,10 @@ export default function PropertyCard({ property, variant = 'standard', className
           </div>
           <div className="flex items-center gap-6 mt-6 pt-6 border-t border-nordic-dark/5">
             <div className="flex items-center gap-2 text-nordic-muted text-sm">
-              <span className="material-icons text-lg">king_bed</span> {property.beds} Beds
+              <span className="material-icons text-lg">king_bed</span> {property.beds} {dictionary.property_card.beds}
             </div>
             <div className="flex items-center gap-2 text-nordic-muted text-sm">
-              <span className="material-icons text-lg">bathtub</span> {property.baths} Baths
+              <span className="material-icons text-lg">bathtub</span> {property.baths} {dictionary.property_card.baths}
             </div>
             <div className="flex items-center gap-2 text-nordic-muted text-sm">
               <span className="material-icons text-lg">square_foot</span> {property.area}
@@ -102,7 +104,7 @@ export default function PropertyCard({ property, variant = 'standard', className
   // Standard Variant (New in Market)
   const isRent = property.type === 'rent';
   const badgeClass = isRent ? 'bg-mosque/90' : 'bg-nordic-dark/90';
-  const badgeText = isRent ? 'FOR RENT' : 'FOR SALE';
+  const badgeText = isRent ? dictionary.property_card.for_rent : dictionary.property_card.for_sale;
 
   return (
     <Link href={`/properties/${property.slug || property.id}`} className={`block bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${className}`}>
@@ -136,7 +138,7 @@ export default function PropertyCard({ property, variant = 'standard', className
         <div className="flex justify-between items-baseline mb-2">
           <h3 className="font-bold text-lg text-nordic-dark">
             {property.price}
-            {isRent && <span className="text-sm font-normal text-nordic-muted">/mo</span>}
+            {isRent && <span className="text-sm font-normal text-nordic-muted">{dictionary.property_card.mo}</span>}
           </h3>
         </div>
         <h4 className="text-nordic-dark font-medium truncate mb-1">

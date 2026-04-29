@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import SearchFiltersModal from '../SearchFiltersModal/SearchFiltersModal';
+import { useTranslation } from '../../contexts/LanguageContext';
 
 const TYPE_CHIPS = ['All', 'House', 'Apartment', 'Villa', 'Penthouse'] as const;
 
@@ -14,6 +15,7 @@ export default function Hero() {
   const currentType = searchParams.get('type') ?? 'All';
 
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const { dictionary } = useTranslation();
 
   const isFilterActive = Boolean(currentLocation) || (currentType && currentType.toLowerCase() !== 'all');
 
@@ -48,12 +50,12 @@ export default function Hero() {
     <section className="py-12 md:py-16">
       <div className="max-w-3xl mx-auto text-center space-y-8">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-nordic-dark leading-tight">
-          Find your{' '}
+          {dictionary.hero.title_start}
           <span className="relative inline-block">
-            <span className="relative z-10 font-medium">sanctuary</span>
+            <span className="relative z-10 font-medium">{dictionary.hero.title_highlight}</span>
             <span className="absolute bottom-2 left-0 w-full h-3 bg-mosque/20 -rotate-1 z-0"></span>
           </span>
-          .
+          {dictionary.hero.title_end}
         </h1>
 
         {/* Search bar */}
@@ -66,10 +68,10 @@ export default function Hero() {
           <input
             type="text"
             className="block w-full pl-12 pr-4 py-4 rounded-xl border-none bg-white text-nordic-dark shadow-soft placeholder-nordic-muted/60 focus:ring-2 focus:ring-mosque focus:bg-white transition-all text-lg"
-            placeholder="Search by city, neighborhood, or address..."
+            placeholder={dictionary.hero.search_placeholder}
           />
           <button className="absolute inset-y-2 right-2 px-6 bg-mosque hover:bg-mosque/90 text-white font-medium rounded-lg transition-colors flex items-center justify-center shadow-lg shadow-mosque/20">
-            Search
+            {dictionary.hero.search_button}
           </button>
         </div>
 
@@ -77,6 +79,7 @@ export default function Hero() {
         <div className="flex items-center justify-center gap-3 overflow-x-auto hide-scroll py-2 px-4 -mx-4">
           {TYPE_CHIPS.map((chip) => {
             const isActive = chip.toLowerCase() === (currentType?.toLowerCase() || 'all');
+            const chipTranslation = dictionary.hero.chips[chip.toLowerCase()] || chip;
             return (
               <button
                 key={chip}
@@ -87,7 +90,7 @@ export default function Hero() {
                     : 'bg-white border border-nordic-dark/5 text-nordic-muted hover:text-nordic-dark hover:border-mosque/50 hover:bg-mosque/5'
                 }`}
               >
-                {chip}
+                {chipTranslation}
               </button>
             );
           })}
@@ -103,7 +106,7 @@ export default function Hero() {
             }`}
           >
             <span className="material-icons text-base">tune</span>
-            Filters
+            {dictionary.hero.filters}
             {currentLocation && (
               <span className="ml-1 bg-white/20 text-white text-xs rounded-full px-2 py-0.5 font-semibold">
                 1
@@ -118,7 +121,7 @@ export default function Hero() {
             {currentType && currentType.toLowerCase() !== 'all' && (
               <div className="flex items-center gap-2 bg-nordic-dark/10 text-nordic-dark rounded-full px-4 py-1.5 text-sm font-medium">
                 <span className="material-icons text-sm">home</span>
-                {currentType}
+                {dictionary.hero.chips[currentType.toLowerCase()] || currentType}
                 <button
                   onClick={() => handleTypeChip('All')}
                   className="ml-1 hover:opacity-70 transition-opacity"
@@ -145,7 +148,7 @@ export default function Hero() {
               onClick={clearAllFilters}
               className="text-xs text-nordic-muted hover:text-nordic-dark transition-colors underline underline-offset-2"
             >
-              Clear all
+              {dictionary.hero.clear_all}
             </button>
           </div>
         )}

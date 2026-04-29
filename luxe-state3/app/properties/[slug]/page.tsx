@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import Navbar from '../../components/Navbar/Navbar';
 import { getPropertyBySlug } from '../../../lib/properties';
 import MapClient from '../../components/PropertyMap/MapClient';
+import { cookies } from 'next/headers';
+import { getDictionary } from '../../../lib/i18n';
+import { defaultLocale, Locale, locales } from '../../../i18n/config';
 
 interface PropertyDetailsPageProps {
   params: Promise<{
@@ -16,6 +19,13 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
   if (!property) {
     notFound();
   }
+
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
+  const locale = locales.includes(localeCookie as Locale)
+    ? (localeCookie as Locale)
+    : defaultLocale;
+  const dictionary = await getDictionary(locale);
 
   const images = property.images;
   const mainImage = images[0];
@@ -36,7 +46,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
               />
               <div className="absolute top-4 left-4 flex gap-2">
                 {property.is_featured && (
-                  <span className="bg-mosque text-white text-xs font-medium px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Premium</span>
+                  <span className="bg-mosque text-white text-xs font-medium px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">{dictionary.property_details.premium}</span>
                 )}
                 {property.badge && (
                   <span className="bg-white/90 backdrop-blur text-nordic-dark text-xs font-medium px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">{property.badge}</span>
@@ -44,7 +54,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
               </div>
               <button className="absolute bottom-4 right-4 bg-white/90 hover:bg-white text-nordic-dark px-4 py-2 rounded-lg text-sm font-medium shadow-lg backdrop-blur transition-all flex items-center gap-2">
                 <span className="material-icons text-sm">grid_view</span>
-                View All Photos
+                {dictionary.property_details.view_all_photos}
               </button>
             </div>
 
@@ -65,24 +75,24 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
             <div className="sticky top-28 space-y-6">
               
               {/* Pricing & Contact Info */}
-              <div className="bg-white  p-6 rounded-xl shadow-sm border border-mosque/5 ">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-mosque/5">
                 <div className="mb-4">
-                  <h1 className="text-4xl font-display font-light text-nordic-dark  mb-2">{property.price}</h1>
+                  <h1 className="text-4xl font-display font-light text-nordic-dark mb-2">{property.price}</h1>
                   <p className="text-nordic-muted font-medium flex items-center gap-1">
                     <span className="material-icons text-mosque text-sm">location_on</span>
                     {property.location}
                   </p>
                 </div>
                 
-                <div className="h-px bg-slate-100  my-6"></div>
+                <div className="h-px bg-slate-100 my-6"></div>
                 
                 <div className="flex items-center gap-4 mb-6">
-                  <img alt="Agent" className="w-14 h-14 rounded-full object-cover border-2 border-white  shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TxUmdQRb2VMjuaNxLEwLorv_dgHzoET2_wL5toSvew6nhtziaR3DX-U69DBN7J74yO6oKokpw8tqEFutJf13MeXghCy7FwZuAxnoJel6FYcKeCRUVinpZtrNnkZvXd-MY5_2MAtRD7JP5BieHixfCaeAPW04jm-y-nvF3HIrwcZ_HRDk_MrNP5WiPV3u9zNrEgM-SQoWGh4xLVSV444aZAbVl03mjjsW5WBpIeodCyqJxprTDp6Q157D06VxcdUSCf-l9UKQT-w" />
+                  <img alt="Agent" className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TxUmdQRb2VMjuaNxLEwLorv_dgHzoET2_wL5toSvew6nhtziaR3DX-U69DBN7J74yO6oKokpw8tqEFutJf13MeXghCy7FwZuAxnoJel6FYcKeCRUVinpZtrNnkZvXd-MY5_2MAtRD7JP5BieHixfCaeAPW04jm-y-nvF3HIrwcZ_HRDk_MrNP5WiPV3u9zNrEgM-SQoWGh4xLVSV444aZAbVl03mjjsW5WBpIeodCyqJxprTDp6Q157D06VxcdUSCf-l9UKQT-w" />
                   <div>
-                    <h3 className="font-semibold text-nordic-dark ">Sarah Jenkins</h3>
+                    <h3 className="font-semibold text-nordic-dark">Sarah Jenkins</h3>
                     <div className="flex items-center gap-1 text-xs text-mosque font-medium">
                       <span className="material-icons text-[14px]">star</span>
-                      <span>Top Rated Agent</span>
+                      <span>{dictionary.property_details.top_rated_agent}</span>
                     </div>
                   </div>
                   <div className="ml-auto flex gap-2">
@@ -98,20 +108,20 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                 <div className="space-y-3">
                   <button className="w-full bg-mosque hover:bg-primary-hover text-white py-4 px-6 rounded-lg font-medium transition-all shadow-lg shadow-mosque/20 flex items-center justify-center gap-2 group">
                     <span className="material-icons text-xl group-hover:scale-110 transition-transform">calendar_today</span>
-                    Schedule Visit
+                    {dictionary.property_details.schedule_visit}
                   </button>
-                  <button className="w-full bg-transparent border border-nordic-dark/10  hover:border-mosque text-nordic-dark/80  hover:text-mosque py-4 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+                  <button className="w-full bg-transparent border border-nordic-dark/10 hover:border-mosque text-nordic-dark/80 hover:text-mosque py-4 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2">
                     <span className="material-icons text-xl">mail_outline</span>
-                    Contact Agent
+                    {dictionary.property_details.contact_agent}
                   </button>
                 </div>
               </div>
 
               {/* Map Preview */}
-              <div className="bg-white  p-2 rounded-xl shadow-sm border border-mosque/5 ">
-                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100 ">
+              <div className="bg-white p-2 rounded-xl shadow-sm border border-mosque/5">
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100">
                   <MapClient locationString={property.location} />
-                  <a href="#" className="absolute bottom-2 right-2 bg-white/90  text-xs font-medium px-2 py-1 rounded shadow-sm text-nordic-dark  hover:text-mosque z-[1000]">View on Map</a>
+                  <a href="#" className="absolute bottom-2 right-2 bg-white/90 text-xs font-medium px-2 py-1 rounded shadow-sm text-nordic-dark hover:text-mosque z-[1000]">{dictionary.property_details.view_on_map}</a>
                 </div>
               </div>
 
@@ -120,34 +130,34 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
 
           {/* Details Section */}
           <div className="lg:col-span-8 lg:row-start-2 lg:-mt-8 space-y-8">
-            <div className="bg-white  p-8 rounded-xl shadow-sm border border-mosque/5 ">
-              <h2 className="text-lg font-semibold mb-6 text-nordic-dark ">Property Features</h2>
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
+              <h2 className="text-lg font-semibold mb-6 text-nordic-dark">{dictionary.property_details.property_features}</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
                   <span className="material-icons text-mosque text-2xl mb-2">square_foot</span>
-                  <span className="text-xl font-bold text-nordic-dark ">{property.area}</span>
+                  <span className="text-xl font-bold text-nordic-dark">{property.area}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
                   <span className="material-icons text-mosque text-2xl mb-2">bed</span>
-                  <span className="text-xl font-bold text-nordic-dark ">{property.beds}</span>
-                  <span className="text-xs uppercase tracking-wider text-nordic-muted">Bedrooms</span>
+                  <span className="text-xl font-bold text-nordic-dark">{property.beds}</span>
+                  <span className="text-xs uppercase tracking-wider text-nordic-muted">{dictionary.property_details.bedrooms}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
                   <span className="material-icons text-mosque text-2xl mb-2">shower</span>
-                  <span className="text-xl font-bold text-nordic-dark ">{property.baths}</span>
-                  <span className="text-xs uppercase tracking-wider text-nordic-muted">Bathrooms</span>
+                  <span className="text-xl font-bold text-nordic-dark">{property.baths}</span>
+                  <span className="text-xs uppercase tracking-wider text-nordic-muted">{dictionary.property_details.bathrooms}</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5  rounded-lg border border-mosque/10 ">
+                <div className="flex flex-col items-center justify-center p-4 bg-mosque/5 rounded-lg border border-mosque/10">
                   <span className="material-icons text-mosque text-2xl mb-2">directions_car</span>
-                  <span className="text-xl font-bold text-nordic-dark ">2</span>
-                  <span className="text-xs uppercase tracking-wider text-nordic-muted">Garage</span>
+                  <span className="text-xl font-bold text-nordic-dark">2</span>
+                  <span className="text-xs uppercase tracking-wider text-nordic-muted">{dictionary.property_details.garage}</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white  p-8 rounded-xl shadow-sm border border-mosque/5 ">
-              <h2 className="text-lg font-semibold mb-4 text-nordic-dark ">About this home</h2>
-              <div className="prose prose-slate  max-w-none text-nordic-muted leading-relaxed">
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
+              <h2 className="text-lg font-semibold mb-4 text-nordic-dark">{dictionary.property_details.about_this_home}</h2>
+              <div className="prose prose-slate max-w-none text-nordic-muted leading-relaxed">
                 <p className="mb-4">
                   Experience modern luxury in this architecturally stunning home located in the heart of {property.location}. Designed with an emphasis on indoor-outdoor living, the residence features floor-to-ceiling glass walls that flood the interiors with natural light.
                 </p>
@@ -156,63 +166,63 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                 </p>
               </div>
               <button className="mt-4 text-mosque font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
-                Read more
+                {dictionary.property_details.read_more}
                 <span className="material-icons text-sm">arrow_forward</span>
               </button>
             </div>
 
-            <div className="bg-white  p-8 rounded-xl shadow-sm border border-mosque/5 ">
-              <h2 className="text-lg font-semibold mb-6 text-nordic-dark ">Amenities</h2>
+            <div className="bg-white p-8 rounded-xl shadow-sm border border-mosque/5">
+              <h2 className="text-lg font-semibold mb-6 text-nordic-dark">{dictionary.property_details.amenities_title}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
-                  <span>Smart Home System</span>
+                  <span>{dictionary.property_details.amenities.smart_home}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
-                  <span>Swimming Pool</span>
+                  <span>{dictionary.property_details.amenities.pool}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
-                  <span>Central Heating & Cooling</span>
+                  <span>{dictionary.property_details.amenities.heating_cooling}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
-                  <span>Electric Vehicle Charging</span>
+                  <span>{dictionary.property_details.amenities.ev_charging}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
-                  <span>Private Gym</span>
+                  <span>{dictionary.property_details.amenities.gym}</span>
                 </div>
                 <div className="flex items-center gap-3 text-nordic-muted">
                   <span className="material-icons text-mosque/60 text-sm">check_circle</span>
-                  <span>Wine Cellar</span>
+                  <span>{dictionary.property_details.amenities.wine_cellar}</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-mosque/5  p-6 rounded-xl border border-mosque/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="bg-mosque/5 p-6 rounded-xl border border-mosque/10 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-white  rounded-full text-mosque shadow-sm">
+                <div className="p-3 bg-white rounded-full text-mosque shadow-sm">
                   <span className="material-icons">calculate</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-nordic-dark ">Estimated Payment</h3>
-                  <p className="text-sm text-nordic-muted">Starting from <strong className="text-mosque">$5,430/mo</strong> with 20% down</p>
+                  <h3 className="font-semibold text-nordic-dark">{dictionary.property_details.estimated_payment}</h3>
+                  <p className="text-sm text-nordic-muted">{dictionary.property_details.starting_from} <strong className="text-mosque">$5,430/mo</strong> {dictionary.property_details.with_down}</p>
                 </div>
               </div>
-              <button className="whitespace-nowrap px-4 py-2 bg-white  border border-nordic-dark/10  rounded-lg text-sm font-semibold hover:border-mosque transition-colors text-nordic-dark ">
-                Calculate Mortgage
+              <button className="whitespace-nowrap px-4 py-2 bg-white border border-nordic-dark/10 rounded-lg text-sm font-semibold hover:border-mosque transition-colors text-nordic-dark">
+                {dictionary.property_details.calculate_mortgage}
               </button>
             </div>
           </div>
         </div>
       </main>
       
-      <footer className="bg-white  border-t border-slate-200  mt-12 py-12">
+      <footer className="bg-white border-t border-slate-200 mt-12 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-sm text-nordic-muted">
-            © 2023 LuxeEstate Inc. All rights reserved.
+            {dictionary.footer.rights}
           </div>
           <div className="flex gap-6">
             <a href="#" className="text-nordic-muted hover:text-mosque transition-colors">
