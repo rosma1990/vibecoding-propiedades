@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import { getDictionary } from "../lib/i18n";
 import { defaultLocale, Locale, locales } from "../i18n/config";
 
@@ -36,9 +37,11 @@ export default async function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col selection:bg-mosque selection:text-white">
-        <LanguageProvider initialLanguage={locale} initialDictionary={dictionary}>
-          {children}
-        </LanguageProvider>
+        <AuthProvider>
+          <LanguageProvider initialLanguage={locale} initialDictionary={dictionary}>
+            {children}
+          </LanguageProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -2,11 +2,13 @@
 
 import Link from 'next/link';
 import { useTranslation } from '../../contexts/LanguageContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { Locale, languageNames, locales } from '../../../i18n/config';
 import { useState, useRef, useEffect } from 'react';
 
 export default function Navbar() {
   const { dictionary, language, setLanguage, isPending } = useTranslation();
+  const { user, isLoading: isAuthLoading, signOut } = useAuth();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -93,15 +95,30 @@ export default function Navbar() {
               <span className="material-icons">notifications_none</span>
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light"></span>
             </button>
-            <button className="flex items-center gap-2 pl-2 border-l border-nordic-dark/10 ml-2">
-              <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all">
-                <img
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAWhQZ663Bd08kmzjbOPmUk4UIxYooNONShMEFXLR-DtmVi6Oz-TiaY77SPwFk7g0OobkeZEOMvt6v29mSOD0Xm2g95WbBG3ZjWXmiABOUwGU0LOySRfVDo-JTXQ0-gtwjWxbmue0qDm91m-zEOEZwAW6iRFB1qC1bAU-wkjxm67Sbztq8w7srHkFT9bVEC86qG-FzhOBTomhAurNRmx9l8Yfqabk328NfdKuVLckgCdaPsNFE3yN65MeoRi05GA_gXIMwG4YDIeA"
-                />
+            {isAuthLoading ? (
+              <div className="w-9 h-9 ml-2 rounded-full bg-gray-200 animate-pulse border-l border-nordic-dark/10 pl-2 box-content"></div>
+            ) : user ? (
+              <div className="flex items-center gap-3 ml-2 pl-4 border-l border-nordic-dark/10">
+                <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent">
+                  <img
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                    src={user.user_metadata?.avatar_url || "https://ui-avatars.com/api/?name=" + (user.email || "User")}
+                  />
+                </div>
+                <button
+                  onClick={signOut}
+                  className="text-nordic-dark/70 hover:text-red-500 transition-colors flex items-center"
+                  title={dictionary.navbar.sign_out}
+                >
+                  <span className="material-icons">logout</span>
+                </button>
               </div>
-            </button>
+            ) : (
+              <Link href="/login" className="ml-2 pl-4 border-l border-nordic-dark/10 text-nordic-dark hover:text-mosque font-medium text-sm transition-colors">
+                {dictionary.navbar.log_in}
+              </Link>
+            )}
           </div>
         </div>
       </div>
