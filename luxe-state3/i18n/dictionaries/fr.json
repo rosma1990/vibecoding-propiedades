@@ -58,6 +58,7 @@
   "property_details": {
     "premium": "Premium",
     "view_all_photos": "Voir Toutes les Photos",
+    "agent_name": "Sarah Jenkins",
     "top_rated_agent": "Agent le Mieux Noté",
     "schedule_visit": "Planifier une Visite",
     "contact_agent": "Contacter l'Agent",
@@ -67,6 +68,8 @@
     "bathrooms": "Salles de Bain",
     "garage": "Garage",
     "about_this_home": "À propos de cette maison",
+    "about_p1": "Découvrez le luxe moderne dans cette magnifique maison architecturale située au cœur de {location}. Conçue avec un accent sur la vie intérieure-extérieure, la résidence dispose de murs en verre du sol au plafond qui inondent les intérieurs de lumière naturelle.",
+    "about_p2": "La cuisine ouverte est équipée d'appareils de premier ordre et de placards personnalisés, idéale pour les passionnés de gastronomie. Repliez-vous dans la suite principale, un sanctuaire de relaxation avec une salle de bain inspirée du spa et un balcon privé.",
     "read_more": "Lire la suite",
     "amenities_title": "Commodités",
     "amenities": {

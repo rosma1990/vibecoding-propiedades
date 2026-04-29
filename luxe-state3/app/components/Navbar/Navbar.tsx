@@ -62,7 +62,7 @@ export default function Navbar() {
                 className="flex items-center gap-1 text-nordic-dark hover:text-mosque transition-colors font-medium text-sm"
               >
                 <span className="material-icons text-[18px]">language</span>
-                <span className="uppercase">{language}</span>
+                <span className="uppercase">{languageNames[language as Locale].split(' ')[0]} {language}</span>
                 <span className="material-icons text-[18px]">{isLangOpen ? 'expand_less' : 'expand_more'}</span>
               </button>
 

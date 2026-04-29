@@ -89,7 +89,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
                 <div className="flex items-center gap-4 mb-6">
                   <img alt="Agent" className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4TxUmdQRb2VMjuaNxLEwLorv_dgHzoET2_wL5toSvew6nhtziaR3DX-U69DBN7J74yO6oKokpw8tqEFutJf13MeXghCy7FwZuAxnoJel6FYcKeCRUVinpZtrNnkZvXd-MY5_2MAtRD7JP5BieHixfCaeAPW04jm-y-nvF3HIrwcZ_HRDk_MrNP5WiPV3u9zNrEgM-SQoWGh4xLVSV444aZAbVl03mjjsW5WBpIeodCyqJxprTDp6Q157D06VxcdUSCf-l9UKQT-w" />
                   <div>
-                    <h3 className="font-semibold text-nordic-dark">Sarah Jenkins</h3>
+                    <h3 className="font-semibold text-nordic-dark">{dictionary.property_details.agent_name}</h3>
                     <div className="flex items-center gap-1 text-xs text-mosque font-medium">
                       <span className="material-icons text-[14px]">star</span>
                       <span>{dictionary.property_details.top_rated_agent}</span>
@@ -159,10 +159,10 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
               <h2 className="text-lg font-semibold mb-4 text-nordic-dark">{dictionary.property_details.about_this_home}</h2>
               <div className="prose prose-slate max-w-none text-nordic-muted leading-relaxed">
                 <p className="mb-4">
-                  Experience modern luxury in this architecturally stunning home located in the heart of {property.location}. Designed with an emphasis on indoor-outdoor living, the residence features floor-to-ceiling glass walls that flood the interiors with natural light.
+                  {dictionary.property_details.about_p1.replace('{location}', property.location)}
                 </p>
                 <p>
-                  The open-concept kitchen is equipped with top-of-the-line appliances and custom cabinetry, perfect for culinary enthusiasts. Retreat to the primary suite, a sanctuary of relaxation with a spa-inspired bath and private balcony.
+                  {dictionary.property_details.about_p2}
                 </p>
               </div>
               <button className="mt-4 text-mosque font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
