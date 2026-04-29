@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "../../lib/supabase";
+import { createClient } from "../../lib/supabase/client";
 import Link from "next/link";
 import { useTranslation } from "../contexts/LanguageContext";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const { dictionary } = useTranslation();
+  const supabase = createClient();
 
   const handleOAuthLogin = async (provider: 'google' | 'github') => {
     setIsLoading(true);
