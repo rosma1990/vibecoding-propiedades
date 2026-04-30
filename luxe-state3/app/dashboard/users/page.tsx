@@ -8,22 +8,17 @@ export default async function UsersPage() {
 
   if (error) {
     return (
-      <div className="bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 flex items-center gap-3">
-        <span className="material-icons">error_outline</span>
-        <p>Error cargando usuarios: {error.message}</p>
-      </div>
+      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 flex items-center gap-3">
+          <span className="material-icons">error_outline</span>
+          <p>Error cargando usuarios: {error.message}</p>
+        </div>
+      </main>
     );
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-nordic-dark">Gestión de Usuarios</h2>
-          <p className="text-sm text-nordic-dark/60 mt-1">Administra los roles y accesos de los usuarios de LuxeEstate</p>
-        </div>
-      </div>
-
+    <div className="w-full flex-grow flex flex-col animate-fade-in">
       <UsersTable initialUsers={users || []} />
     </div>
   );

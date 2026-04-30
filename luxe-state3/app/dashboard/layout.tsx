@@ -11,65 +11,92 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     redirect("/login");
   }
 
-  return (
-    <div className="min-h-screen bg-background-light flex flex-col md:flex-row">
-      {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-white border-r border-gray-100 flex-shrink-0 z-20 shadow-sm relative">
-        <div className="p-6 flex items-center justify-between md:justify-center border-b border-gray-100">
-          <Link href="/" className="inline-flex items-center gap-2 text-mosque font-bold text-xl hover:opacity-90 transition-opacity">
-            <span className="material-icons bg-mosque text-white p-2 rounded-lg text-xl shadow-sm">real_estate_agent</span>
-            LuxeEstate
-          </Link>
-        </div>
-        
-        <div className="p-4 space-y-2">
-          <p className="text-xs font-semibold text-nordic-dark/50 uppercase tracking-wider mb-4 px-2">
-            Administración
-          </p>
-          <Link 
-            href="/dashboard" 
-            className="flex items-center gap-3 px-4 py-3 text-nordic-dark font-medium rounded-lg hover:bg-accent/10 hover:text-mosque transition-colors"
-          >
-            <span className="material-icons text-mosque/70">dashboard</span>
-            Propiedades
-          </Link>
-          <Link 
-            href="/dashboard/users" 
-            className="flex items-center gap-3 px-4 py-3 text-nordic-dark font-medium rounded-lg hover:bg-accent/10 hover:text-mosque transition-colors"
-          >
-            <span className="material-icons text-mosque/70">people</span>
-            Usuarios
-          </Link>
-        </div>
-      </aside>
+  // Obtenemos el rol del usuario para mostrarlo en el perfil
+  const { data: roleData } = await supabase
+    .from('user_roles')
+    .select('role')
+    .eq('user_id', user.id)
+    .single();
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col relative overflow-hidden">
-        {/* Header */}
-        <header className="bg-white border-b border-gray-100 p-4 sm:p-6 flex items-center justify-between z-10 relative shadow-sm">
-          <h1 className="text-2xl font-bold text-nordic-dark">Panel de Control</h1>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 bg-background-light px-4 py-2 rounded-full border border-gray-100 shadow-inner">
-              <span className="material-icons text-mosque text-sm">account_circle</span>
-              <span className="text-sm font-medium text-nordic-dark max-w-[150px] truncate">
-                {user.email}
-              </span>
+  const userRole = roleData?.role === 'admin' ? 'Administrador' : 'Usuario';
+  const userName = user.user_metadata?.full_name || 'Agente Luxe';
+
+  return (
+    <div className="bg-background-light font-display text-nordic-dark min-h-screen flex flex-col">
+      {/* Navbar Superior */}
+      <nav className="sticky top-0 z-50 bg-white border-b border-mosque/10 backdrop-blur-md bg-opacity-90">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo & Primary Nav */}
+            <div className="flex items-center gap-12">
+              <Link href="/" className="flex-shrink-0 flex items-center gap-2 cursor-pointer group">
+                <div className="w-8 h-8 rounded bg-mosque flex items-center justify-center text-white font-bold text-lg group-hover:bg-mosque/90 transition-colors">
+                  <span className="material-icons text-xl">real_estate_agent</span>
+                </div>
+                <span className="font-bold text-xl tracking-tight text-nordic-dark">LuxeEstate</span>
+              </Link>
+              
+              <div className="hidden md:flex space-x-8">
+                <Link 
+                  href="/dashboard"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-mosque/30 text-sm font-medium text-nordic-dark/60 hover:text-mosque transition-colors"
+                >
+                  Propiedades
+                </Link>
+                <Link 
+                  href="/dashboard/users"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-mosque/30 text-sm font-medium text-nordic-dark/60 hover:text-mosque transition-colors"
+                >
+                  Usuarios
+                </Link>
+                <Link 
+                  href="#"
+                  className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-mosque/30 text-sm font-medium text-nordic-dark/60 hover:text-mosque transition-colors opacity-50 cursor-not-allowed"
+                >
+                  Finanzas
+                </Link>
+              </div>
+            </div>
+
+            {/* Secondary Nav / Profile */}
+            <div className="flex items-center gap-4">
+              <button className="p-2 rounded-full text-nordic-dark/40 hover:text-mosque hover:bg-mosque/5 transition-colors relative">
+                <span className="material-icons text-xl">notifications_none</span>
+                {/* Indicador de notificación */}
+                <span className="absolute top-2 right-2 block h-1.5 w-1.5 rounded-full bg-red-500"></span>
+              </button>
+              
+              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
+                <div className="flex flex-col items-end hidden sm:flex">
+                  <span className="text-sm font-semibold text-nordic-dark">{userName}</span>
+                  <span className="text-xs text-nordic-dark/60">{userRole}</span>
+                </div>
+                <div className="h-9 w-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-white flex items-center justify-center text-nordic-dark/50 cursor-pointer">
+                  {user.user_metadata?.avatar_url ? (
+                    <img src={user.user_metadata.avatar_url} alt="Profile" className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="material-icons">person</span>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-        </header>
-
-        {/* Content Area */}
-        <div className="flex-1 overflow-auto p-4 sm:p-6 md:p-8 relative">
-           {/* Decorative Background Elements */}
-          <div className="absolute inset-0 pointer-events-none opacity-20 -z-10">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/30 rounded-full blur-3xl"></div>
-          </div>
-          
-          <div className="max-w-6xl mx-auto">
-            {children}
-          </div>
         </div>
-      </main>
+      </nav>
+
+      {/* Main Content Area */}
+      <div className="flex-grow flex flex-col relative w-full">
+        {children}
+      </div>
+
+      {/* Footer del Dashboard */}
+      <footer className="mt-auto border-t border-gray-200 bg-white">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-sm text-nordic-dark/40">
+            © {new Date().getFullYear()} LuxeEstate Management. Todos los derechos reservados.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

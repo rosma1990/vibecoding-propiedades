@@ -62,7 +62,7 @@ export default async function PropertyDetailsPage({ params }: PropertyDetailsPag
             {images.length > 1 && (
               <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 snap-x">
                 {images.map((img, idx) => (
-                  <div key={idx} className={`flex-none w-48 aspect-[4/3] rounded-lg overflow-hidden cursor-pointer transition-opacity snap-start ${idx === 0 ? 'ring-2 ring-mosque ring-offset-2 ring-offset-background-light' : 'opacity-70 hover:opacity-100'}`}>
+                  <div key={idx} className={`flex-none w-48 aspect-[4/3] rounded-lg overflow-hidden cursor-pointer transition-all snap-start ${idx === 0 ? 'border-[3px] border-mosque shadow-md' : 'opacity-70 hover:opacity-100'}`}>
                     <img alt={`${property.title} - view ${idx + 1}`} className="w-full h-full object-cover" src={img} />
                   </div>
                 ))}
