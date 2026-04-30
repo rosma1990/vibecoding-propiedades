@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "../../../lib/supabase/client";
+import { Breadcrumbs } from "../Breadcrumbs";
 
 type UserWithRole = {
   user_id: string;
@@ -56,6 +57,7 @@ export function UsersTable({ initialUsers }: { initialUsers: UserWithRole[] }) {
   return (
     <>
       <header className="w-full pt-8 pb-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <Breadcrumbs />
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-nordic-dark">User Directory</h1>

@@ -1,5 +1,7 @@
 import { createClient } from "../../lib/supabase/server";
 import { PropertiesList } from "./PropertiesList";
+import { Breadcrumbs } from "./Breadcrumbs";
+
 export default async function DashboardPage() {
   const supabase = await createClient();
   
@@ -26,6 +28,7 @@ export default async function DashboardPage() {
   return (
     <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in">
       {/* Header Section */}
+      <Breadcrumbs />
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-nordic-dark tracking-tight">My Properties</h1>
