@@ -1,7 +1,6 @@
 import { type NextRequest } from 'next/server'
 import { updateSession } from './lib/supabase/middleware'
 
-// Cambiamos 'middleware' por 'proxy' según la sugerencia de tu log
 export async function proxy(request: NextRequest) {
   return await updateSession(request)
 }
