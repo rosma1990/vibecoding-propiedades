@@ -13,6 +13,11 @@ export interface Property {
   is_featured?: boolean;
   slug?: string;
   images: string[];
+  description?: string;
+  property_type?: string;
+  year_built?: number;
+  parking?: number;
+  amenities?: string[];
 }
 
 export interface PaginatedProperties {
@@ -117,4 +122,70 @@ export async function toggleFeatured(id: string, currentValue: boolean): Promise
   }
 
   return { success: true, is_featured: newValue };
+}
+
+export async function uploadPropertyImage(file: File): Promise<string | null> {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
+  const filePath = `${fileName}`;
+
+  const { error: uploadError, data } = await supabase.storage
+    .from('property_images')
+    .upload(filePath, file);
+
+  if (uploadError) {
+    console.error('Error uploading image:', uploadError);
+    return null;
+  }
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('property_images')
+    .getPublicUrl(filePath);
+
+  return publicUrl;
+}
+
+export async function createProperty(propertyData: Omit<Property, 'id' | 'created_at'>): Promise<Property | null> {
+  const { data, error } = await supabase
+    .from('properties')
+    .insert([propertyData])
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error creating property:', error);
+    return null;
+  }
+
+  return data as Property;
+}
+
+export async function updateProperty(id: string, propertyData: Partial<Property>): Promise<Property | null> {
+  const { data, error } = await supabase
+    .from('properties')
+    .update(propertyData)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error updating property:', error);
+    return null;
+  }
+
+  return data as Property;
+}
+
+export async function deleteProperty(id: string): Promise<boolean> {
+  const { error } = await supabase
+    .from('properties')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('Error deleting property:', error);
+    return false;
+  }
+
+  return true;
 }

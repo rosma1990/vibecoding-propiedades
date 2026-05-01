@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export function PropertiesList({ properties }: { properties: any[] }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -87,9 +88,9 @@ export function PropertiesList({ properties }: { properties: any[] }) {
 
             {/* Actions */}
             <div className="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
-              <button className="p-2 rounded-lg text-nordic-dark/40 hover:text-mosque hover:bg-hint-of-green/50 transition-all" title="Edit Property">
+              <Link href={`/dashboard/properties/${property.id}/edit`} className="p-2 rounded-lg text-nordic-dark/40 hover:text-mosque hover:bg-hint-of-green/50 transition-all" title="Edit Property">
                 <span className="material-icons text-xl">edit</span>
-              </button>
+              </Link>
               <button className="p-2 rounded-lg text-nordic-dark/40 hover:text-red-600 hover:bg-red-50 transition-all" title="Delete Property">
                 <span className="material-icons text-xl">delete_outline</span>
               </button>
